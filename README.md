@@ -6,4 +6,4 @@ In `linker.R`, there are two parts:
 
 2. Visualization part visualizes the cleaned data. For now, it only supports two proteins.
 
-![](./initial_try.png)
+![](./images/initial_try.png)
