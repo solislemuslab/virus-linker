@@ -1,9 +1,19 @@
-# Virus Linker
+# Virus Linker Shiny App
 
-In `linker.R`, there are two parts:
+## Folder Structure
+```
+virus_linker/                    
+├── ShinyApp/                          
+│   ├── server.R       
+│   ├── ui.R                   
+│   ├── global.R
+│   ├── get_data.R  
+│   ├── linker.R  
+├── README.md 
+```
 
-1. Data part reads the original data and gives a cleaned version of it for future analysis.
+- `get_data.R` contains function that will transform the upload data to clean data.
 
-2. Visualization part visualizes the cleaned data. For now, it only supports two proteins.
+- `linker.R` visualizes the cleaned data.
 
-![](./images/initial_try.png)
+![](./images/shiny.png)
