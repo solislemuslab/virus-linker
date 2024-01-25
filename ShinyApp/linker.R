@@ -68,7 +68,7 @@ plot_linker = function(df, threshold_min, threshold_max, proteins){
                    # vjust = 1.5,
                    hjust = -0.3,
                    size = 2.5,
-                   angle = -45,
+                   angle = -90,
                    repel = T)
   
   
