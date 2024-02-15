@@ -43,7 +43,7 @@ ui <- fluidPage(
           plotOutput("full_name_plot")
         ),
         fluidRow(
-          h3("Number Name"),
+          h3("Position"),
           plotOutput("number_name_plot")
         )
       )

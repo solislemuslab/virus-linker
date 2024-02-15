@@ -12,7 +12,8 @@ server = function(input, output, session){
     mydf_num(read.csv("clean_data_num.csv", header = T))
     
     updatePickerInput(session, "protein",
-                      choices = unique(c(mydf()$atom1, mydf()$atom2)))
+                      choices = unique(c(mydf()$atom1, mydf()$atom2)),
+                      selected = unique(c(mydf()$atom1, mydf()$atom2)))
     
     updateSliderInput(session, "threshold",
                       min = round(min(mydf()$distance), 4) - 0.01,

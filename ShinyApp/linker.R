@@ -69,8 +69,10 @@ plot_linker = function(df, threshold_min, threshold_max, proteins){
                    hjust = -0.3,
                    size = 2.5,
                    angle = -90,
-                   repel = T)
-  
+                   repel = T) +
+    labs(edge_color = "Interaction type",
+         edge_alpha = "1/distance",
+         edge_width = "1/distance")
   
   p
 }
