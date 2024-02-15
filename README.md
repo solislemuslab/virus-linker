@@ -16,4 +16,4 @@ virus_linker/
 
 - `linker.R` visualizes the cleaned data.
 
-![](./images/shiny.png)
+![](./images/shiny_0215.png)
