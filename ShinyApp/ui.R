@@ -41,7 +41,8 @@ ui = fluidPage(
         )
       ),
       mainPanel(
-        plotOutput("full_name_plot")
+        plotOutput("full_name_plot",
+                   height = "600px")
       )
     )
   )
