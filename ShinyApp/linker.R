@@ -5,24 +5,27 @@ plot_linker = function(df, threshold_min, threshold_max, proteins){
   }
   
   ## Filter the data set
-  df <- df  %>% 
-    filter(distance >= threshold_min,
-           distance <= threshold_max,
-           atom1 %in% proteins,
+  df = df  %>% 
+    filter(atom1 %in% proteins,
            atom2 %in% proteins) %>% 
     mutate(self_link = atom1 == atom2,
+           in_threshold = (distance >= threshold_min & 
+                             distance <= threshold_max),
+           dist_plot = ifelse(in_threshold, distance, NA),
            color = if_else(self_link, atom1, paste0(atom1, atom2)))
+  
   
   if (dim(df)[1] == 0 | threshold_min == threshold_max) {
     return(NULL)
   }
-
-  edge_list <- df %>%
-    select(atom1_name, atom2_name, distance)
   
-  graph <- graph_from_data_frame(edge_list, directed = FALSE)
+  ## Create graph
+  edge_list = df %>%
+    select(atom1_name, atom2_name, dist_plot)
   
-  E(graph)$width = edge_list$distance
+  graph = graph_from_data_frame(edge_list, directed = FALSE)
+  
+  E(graph)$width = 1/edge_list$dist_plot
   
   atoms = unique(c(df$atom1, df$atom2))
   E(graph)$color = df$color
@@ -33,11 +36,11 @@ plot_linker = function(df, threshold_min, threshold_max, proteins){
                                  edge_list$atom2_name[df$atom2==atoms[i]]))
   }
   
+  ## Layout
   xx = rep(1, length(atoms))
   yy = (1:length(atoms))*10
   XX = c()
   YY = c()
-  Colors = c()
   
   for (i in 1:length(V(graph)$name)){
     for (j in 1:length(atom_names)){
@@ -54,15 +57,16 @@ plot_linker = function(df, threshold_min, threshold_max, proteins){
     XX[pro] = XX[pro][rank(V(graph)$name[pro])]
   }
   
-  V(graph)$x <- XX
+  V(graph)$x = XX
 
-  V(graph)$y <- YY
+  V(graph)$y = YY
   
+  ## Plot
   p = ggraph(graph, layout = 'manual', x = V(graph)$x, y = V(graph)$y) +
     geom_edge_arc(aes(width = width,
                       alpha = width, 
                       color = factor(color)), 
-                  strength = 0.2) + 
+                  strength = 0.2) +
     geom_node_point(shape = 19, size = 1) +
     geom_node_text(aes(label = name),
                    # vjust = 1.5,
@@ -72,7 +76,8 @@ plot_linker = function(df, threshold_min, threshold_max, proteins){
                    repel = T) +
     labs(edge_color = "Interaction type",
          edge_alpha = "1/distance",
-         edge_width = "1/distance")
+         edge_width = "1/distance") +
+    ggtitle("Virus Linker")
   
   p
 }

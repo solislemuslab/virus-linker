@@ -1,6 +1,6 @@
 # UI
 
-ui <- fluidPage(
+ui = fluidPage(
   # theme = shinytheme("cerulean"),
   navbarPage(
     "Virus Linker",
@@ -8,6 +8,7 @@ ui <- fluidPage(
       sidebarPanel(
         width = 4,
         wellPanel(
+          # Upload data
           fileInput(
             inputId = "df",
             label = "User Data",
@@ -18,15 +19,17 @@ ui <- fluidPage(
             width = "100%"
           ),
           
+          # Select distance range
           sliderInput(
             inputId = "threshold",
-            label = "Threshold",
+            label = "Distance Threshold",
             min = 0,
-            max = 1,
-            value = c(0, 1),
-            step = 0.0001
+            max = 5,
+            value = c(0, 5),
+            step = 0.001
           ),
           
+          # Select proteins
           pickerInput(
             inputId = "protein",
             label = "Proteins",
@@ -38,14 +41,7 @@ ui <- fluidPage(
         )
       ),
       mainPanel(
-        fluidRow(
-          h3("Full Name"),
-          plotOutput("full_name_plot")
-        ),
-        fluidRow(
-          h3("Position"),
-          plotOutput("number_name_plot")
-        )
+        plotOutput("full_name_plot")
       )
     )
   )
