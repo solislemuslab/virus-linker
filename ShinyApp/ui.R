@@ -7,6 +7,10 @@ ui = fluidPage(
     sidebarLayout(
       sidebarPanel(
         width = 4,
+        h3("Instructions:"),
+        helpText("Please upload the data file from your device."),
+        helpText("After uploading the data, please select proteins that are in interest."),
+        helpText("Then, you can filter down the linkers by the distance threshold."),
         wellPanel(
           # Upload data
           fileInput(
