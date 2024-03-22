@@ -1,5 +1,7 @@
 library(shiny)
-library(tidyverse)
+#library(tidyverse)
+library(dplyr)
+library(stringr)
 library(ggraph)
 library(igraph)
 library(shinyWidgets)
