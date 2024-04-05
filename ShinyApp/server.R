@@ -36,7 +36,7 @@ server = function(input, output, session){
     }
   })
   
-  output$full_name_plot = renderPlot({
+  output$full_name_plot = renderGirafe({
     plot_linker(mydf(), input$threshold[1], input$threshold[2],
                 input$protein)
   })

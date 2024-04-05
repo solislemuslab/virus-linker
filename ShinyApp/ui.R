@@ -45,8 +45,7 @@ ui = fluidPage(
         )
       ),
       mainPanel(
-        plotOutput("full_name_plot",
-                   height = "600px")
+        girafeOutput("full_name_plot", height = 1000)
       )
     )
   )

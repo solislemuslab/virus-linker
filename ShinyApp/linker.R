@@ -38,7 +38,7 @@ plot_linker = function(df, threshold_min, threshold_max, proteins){
   
   ## Layout
   xx = rep(1, length(atoms))
-  yy = (1:length(atoms))*10
+  yy = (1:length(atoms))*50
   XX = c()
   YY = c()
   
@@ -47,7 +47,7 @@ plot_linker = function(df, threshold_min, threshold_max, proteins){
       if (V(graph)$name[i] %in% atom_names[[j]]){
         XX = c(XX, xx[j])
         YY = c(YY, yy[j])
-        xx[j] = xx[j] + 5 
+        xx[j] = xx[j] + 50 
       }
     }
   }
@@ -66,20 +66,25 @@ plot_linker = function(df, threshold_min, threshold_max, proteins){
     geom_edge_arc(aes(width = width,
                       alpha = width, 
                       color = factor(color)), 
-                  strength = 0.2) +
-    geom_node_point(shape = 19, size = 1) +
-    geom_node_text(aes(label = name),
-                   # vjust = 1.5,
-                   hjust = -0.3,
-                   size = 2.5,
-                   angle = -90,
-                   repel = T) +
+                  strength = 0.05) +
+    geom_point_interactive(size = 10, hover_nearest = TRUE,
+                           mapping = aes(x = x, y = y, data_id = name,
+                                         tooltip = name)) +
+    # geom_node_text(aes(label = name),
+    #                # vjust = 1.5,
+    #                hjust = -0.3,
+    #                size = 2.5,
+    #                angle = -90,
+    #                repel = T) +
     labs(edge_color = "Interaction type",
          edge_alpha = "1/distance",
          edge_width = "1/distance") +
-    ggtitle("Virus Linker")
+    theme(legend.text = element_text(size = 60),
+          legend.title = element_text(size = 80),
+          legend.key.size = unit(10, "cm"))
   
-  p
+  # p
+  return(girafe(ggobj = p, height_svg = 75, width_svg = 100))
 }
 
 

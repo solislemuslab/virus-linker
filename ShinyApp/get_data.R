@@ -16,8 +16,8 @@ get_df = function(file, out_name = "clean_data"){
   
   # Clean the data frame
   df = df %>% 
-    mutate(atom1_name = paste(X3, X2, X4, sep="_"),
-           atom2_name = paste(X7, X6, X8, sep="_"))
+    mutate(atom1_name = paste(X3, X2, X4, X1, sep="_"),
+           atom2_name = paste(X7, X6, X8, X5, sep="_"))
 
   df = df[, -c(2:4, 6:9)]
   colnames(df)[1:3] = c("atom1", "atom2", "distance")
