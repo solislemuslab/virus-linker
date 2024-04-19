@@ -22,7 +22,13 @@ ui = fluidPage(
             placeholder = "No file selected",
             width = "100%"
           ),
-          
+          fileInput(
+            "mapper",
+            "Mapping File",
+            accept = c(".csv", ".txt"),
+            placeholder = "No file selected",
+            width = "100%"
+          ),
           # Select distance range
           sliderInput(
             inputId = "threshold",

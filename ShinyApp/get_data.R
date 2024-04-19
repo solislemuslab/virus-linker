@@ -1,7 +1,12 @@
 ##### Data #####
 get_df = function(file, out_name = "clean_data"){
+  lines <- readLines(file)
+  start <- which(grepl("distance", lines)) + 1
+  end <- length(lines) - 2
+  data_lines <- lines[start:end]
+  
   # Read raw data set
-  df_initial = read.table(file,
+  df_initial = read.table(text = data_lines,
                            header = TRUE, 
                            sep = "\n", 
                            stringsAsFactors = FALSE)
@@ -33,3 +38,6 @@ get_df = function(file, out_name = "clean_data"){
 # cc = data.frame(do.call(rbind, bb[,2] %>% str_split("_")))
 # bb[,3] = paste(cc[,2], cc[,3], sep="_")
 # bb[!duplicated(bb[,c(1,3)]),] -> dd
+
+
+
